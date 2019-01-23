@@ -1,0 +1,19 @@
+DESK_DIR=$HOME/.local/share/applications
+APP=$(basename "$1")
+FNAME=$DESK_DIR/$APP.desktop
+
+if [ -f $FNAME ]; then
+	echo $FNAME already exists
+else
+	cat > $FNAME <<- EOF
+		[Desktop Entry]
+		Type=Application
+		Encoding=UTF-8
+		Name=$APP
+		Comment=Description of $APP
+		Exec="$1"
+		Icon=application.png
+		Terminal=false
+	EOF
+	vi $FNAME
+fi
