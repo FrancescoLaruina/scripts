@@ -1,11 +1,12 @@
+#!/bin/bash
 DESK_DIR=$HOME/.local/share/applications
 APP=$(basename "$1")
 FNAME=$DESK_DIR/$APP.desktop
 
-if [ -f $FNAME ]; then
-	echo $FNAME already exists
+if [ -f "$FNAME" ]; then
+	echo "$FNAME" already exists
 else
-	cat > $FNAME <<- EOF
+	cat > "$FNAME" <<- EOF
 		[Desktop Entry]
 		Type=Application
 		Encoding=UTF-8
@@ -15,5 +16,5 @@ else
 		Icon=application.png
 		Terminal=false
 	EOF
-	vi $FNAME
+	vi "$FNAME"
 fi
