@@ -1,0 +1,6 @@
+#!/bin/bash
+IN_FNAME="$1"
+OUT_FILENAME="${IN_FNAME%.svg}.png"
+DPI=1000
+# Be careful: in case OUT_FILENAME exists, it will be overwritten 
+inkscape --export-png="$OUT_FILENAME" --export-dpi=$DPI --file="$IN_FNAME" --without-gui

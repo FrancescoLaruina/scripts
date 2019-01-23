@@ -1,0 +1,15 @@
+#!/bin/bash
+
+FONT_FOLDER="$HOME/.local/share/fonts"
+mkdir -p "$FONT_FOLDER" 
+
+for FONT in "$@";do
+	if [ -f "$FONT" ];then 
+		cp "$FONT" "$FONT_FOLDER" 
+	else 
+		echo "$FONT not found"
+	fi
+done
+
+#update font cache
+fc-cache -fv
