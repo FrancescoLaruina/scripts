@@ -1,0 +1,12 @@
+import PyPDF2
+def printer_friendly(fname_list):
+    fnames = open(fname_list).read().splitlines()
+    output = PyPDF2.PdfFileWriter()
+    for fname in fnames:
+        reader = PyPDF2.PdfFileReader(fname)
+        output.appendPagesFromReader(reader)
+        if (output.getNumPages() % 2): # it is true if numPage is odd
+            output.addBlankPage()
+    with open('unito.pdf','wb') as f:
+        output.write(f)
+
