@@ -48,8 +48,14 @@ class TestZipRename(unittest.TestCase):
                     zip_file.write(fname)
             prefix = 't'
             extract_rename(test_zip, prefix)
-            after_zip = [read_file(unzipped_file) for unzipped_file in glob.glob('test/*')]
-            before_zip = [read_file(raw_file) for raw_file in glob.glob("./test_*")]
+
+            after_zip = []
+            before_zip = []
+            for idx in range(num_files):
+                raw_file = 'test_{}'.format(idx)
+                post_file = 'test/t_{}'.format(idx)
+                after_zip.append(read_file(raw_file))             
+                before_zip.append(read_file(post_file))
             self.assertListEqual(before_zip, after_zip)
 
 if __name__ == "__main__":
