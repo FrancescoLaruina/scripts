@@ -13,19 +13,22 @@ def build_parser():
                         help='A prefix for the extracted files',
                         default='file')
     return parser
-def extract_rename(zip_path):
+def extract_rename(zip_path, prefix):
     """ Extract and rename the file contained in the zip archive.
     Parameters:
     -----------
     zip_path: str
         Path of the zip file to extract
+    prefix: str
+        Prefix to prepend to the extracted files
     """
     unzip_folder = zip_path.strip('.zip')
     os.mkdir(unzip_folder)
     zip_file = zipfile.ZipFile(zip_path, mode='r')
     for idx, file_ in enumerate(zip_file.filelist):
-        file_.filename = '{}_{}'.format(ARGS.prefix, idx)
+        file_.filename = '{}_{}'.format(prefix, idx)
         zip_file.extract(file_, path=unzip_folder)
+
 if __name__ == "__main__":
     ARGS = build_parser().parse_args()
-    extract_rename(os.path.abspath(ARGS.filename))
+    extract_rename(os.path.abspath(ARGS.filename), ARGS.prefix)

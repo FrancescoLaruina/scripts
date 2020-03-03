@@ -1,0 +1,5 @@
+#!/bin/bash
+
+CURRENT_DIRECTORY="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
+PYTHONPATH="${CURRENT_DIRECTORY}":"${PYTHONPATH}"
+export PYTHONPATH
