@@ -1,3 +1,4 @@
+![Build status](https://travis-ci.org/FrancescoLaruina/scripts.svg?branch=master)
 # scripts
 A collection of scripts with different goals:
 
