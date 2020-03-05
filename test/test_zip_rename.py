@@ -54,9 +54,25 @@ class TestZipRename(unittest.TestCase):
             for idx in range(num_files):
                 raw_file = 'test_{}'.format(idx)
                 post_file = 'test/t_{}'.format(idx)
-                after_zip.append(read_file(raw_file))             
+                after_zip.append(read_file(raw_file))
                 before_zip.append(read_file(post_file))
             self.assertListEqual(before_zip, after_zip)
+    def test_suffix(self):
+        """ Test extension application """
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            os.chdir(tmp_dir)
+            test_fname = 'content.test'
+            archive_fname = 'archive.zip'
+            num_files = 10
+            with open(test_fname, 'w') as file_:
+                file_.write(generate_random_string())
+            with zipfile.ZipFile(archive_fname, 'w') as zip_archive:
+                for _ in range(num_files):
+                    zip_archive.write(test_fname)
+            ext = '.ext'
+            extract_rename(archive_fname, 'pref', ext)
+            num_extracted_files = len(glob.glob("{}/*{}".format(archive_fname.strip('.zip'), ext)))
+            self.assertEqual(num_extracted_files, num_files)
 
 if __name__ == "__main__":
     unittest.main()
